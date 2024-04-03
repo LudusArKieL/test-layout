@@ -29,8 +29,16 @@ export default function Home({ sidebarOpen }) {
                             </div>
                         )}
                     </div>
-                    <h2>Calendar</h2>
-                    <CalendarTable year={2024} month={2} /> {/* Displaying February 2024 */}
+                    <div>
+                        <h2>Calendar</h2>
+                        <CalendarTable year={2024} month={4} /> {/* Displaying February 2024 */}
+                    </div>
+                    <div>
+                        <h2>My Task </h2>
+                    </div>
+                    <div>
+                        <h2>My Goal </h2>
+                    </div>
                 </div >
             </div >
             {/* Main content */}
@@ -38,7 +46,7 @@ export default function Home({ sidebarOpen }) {
                 {/* Add your main content here */}
                 <div className="main-content ">
                     < h2 > Calendar</h2 >
-                    <Calendar/>
+                    <Calendar />
                 </div>
             </div >
         </div >

@@ -8,38 +8,50 @@ function CalendarDays(props) {
 
     for (let day = 0; day < 42; day++) {
         if (day === 0 && weekdayOfFirstDay === 0) {
-          firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
+            firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
         } else if (day === 0) {
-          firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
         } else {
-          firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
+            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
         }
-    
+
         let calendarDay = {
-          currentMonth: (firstDayOfMonth.getMonth() === props.day.getMonth()),
-          date: (new Date(firstDayOfMonth)),
-          month: firstDayOfMonth.getMonth(),
-          number: firstDayOfMonth.getDate(),
-          selected: (firstDayOfMonth.toDateString() === props.day.toDateString()),
-          year: firstDayOfMonth.getFullYear()
+            currentMonth: (firstDayOfMonth.getMonth() === props.day.getMonth()),
+            date: (new Date(firstDayOfMonth)),
+            month: firstDayOfMonth.getMonth(),
+            number: firstDayOfMonth.getDate(),
+            selected: (firstDayOfMonth.toDateString() === props.day.toDateString()),
+            year: firstDayOfMonth.getFullYear()
         }
-    
         currentDays.push(calendarDay);
-      }
+    }
+
+    // Group days by week
+    let weeks = [];
+    let week = [];
+    currentDays.forEach((day, index) => {
+        week.push(day);
+        if ((index + 1) % 7 === 0 || index === currentDays.length - 1) {
+            weeks.push(week);
+            week = [];
+        }
+    });
 
     return (
-        <div className="table-content">
+        <tbody>
             {
-                currentDays.map((day) => {
-                    return (
-                        <div className={"calendar-day" + (day.currentMonth ? " current" : "") + (day.selected ? " selected" : "")}
-                            onClick={() => props.changeCurrentDay(day)}>
-                            <p>{day.number}</p>
-                        </div>
-                    )
-                })
+                weeks.map((week, weekIndex) => (
+                    <tr key={weekIndex} className="table-content">
+                        {week.map((day, dayIndex) => (
+                            <td key={dayIndex} className={"calendar-day" + (day.currentMonth ? " current" : "") + (day.selected ? " selected" : "")}
+                                onClick={() => props.changeCurrentDay(day)}>
+                                <p>{day.number}</p>
+                            </td>
+                        ))}
+                    </tr>
+                ))
             }
-        </div>
+        </tbody>
     )
 }
 
@@ -67,16 +79,21 @@ export default class Calendar extends Component {
                     <h2>{this.months[this.state.currentDay.getMonth()]} {this.state.currentDay.getFullYear()}</h2>
                 </div>
                 <div className="calendar-body">
-                    <div className="table-header">
-                        {
-                            this.weekdays.map((weekday) => {
-                                return <div className="weekday"><p>{weekday}</p></div>
-                            })
-                        }
-                    </div>
-                    <CalendarDays day={this.state.currentDay} changeCurrentDay={this.changeCurrentDay} />
+                    <table className="calendar-table">
+                        <thead>
+                            <tr className="table-header">
+                                {
+                                    this.weekdays.map((weekday, index) => {
+                                        return <th key={index} className="weekday"><p>{weekday}</p></th>
+                                    })
+                                }
+                            </tr>
+                        </thead>
+                        <CalendarDays day={this.state.currentDay} changeCurrentDay={this.changeCurrentDay} />
+                    </table>
                 </div>
             </div>
         )
     }
 }
+

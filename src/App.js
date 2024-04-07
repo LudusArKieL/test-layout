@@ -27,7 +27,7 @@ function App() {
                 mainContent.style.gridColumn = openDashboard ? "2 / 2" : "1 / 2 ";
             }
             else{
-                mainContent.style.gridColumn = openDashboard ? "2 / 2" : "1 / 2 ";
+                mainContent.style.gridColumn = openDashboard ? "2 / 2" : "1 / 3 span ";
             }
         }
     };
@@ -48,7 +48,7 @@ function App() {
         const mainContent = document.querySelector(".main");
         if (mainContent) {
             if (!openDashboard) {
-                mainContent.style.gridColumn = openRightboard ? "2 / 3 " : "2 / 3 span";
+                mainContent.style.gridColumn = openRightboard ? "2 / 2 " : "2 / 3 span";
             }
             else {
                 mainContent.style.gridColumn = openRightboard ? "1 / 2 " : " 1 / 3 span";

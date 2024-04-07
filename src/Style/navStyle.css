@@ -2,9 +2,6 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0%;
-}
 /* Menu button */
 .menu-btn {
     background-color: #333;
@@ -18,7 +15,7 @@ body {
 }
 
 .menu-btn:hover {
-    background-color: red;
+    background-color: #1111116f;
 }
 
 /* Navbar */
@@ -56,9 +53,9 @@ body {
 }
 
 .nav li.active {
-    background-color: #555;
+    background-color: rgba(255, 48, 48, 0.533);
 }
 
 .nav li:hover {
-    background-color: #777;
+    background-color: #555;
 }

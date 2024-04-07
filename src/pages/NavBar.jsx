@@ -1,15 +1,15 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"; // Import necessary modules
 import { IoIosMenu } from "react-icons/io"; // Import the IoIosMenu icon
-import './Style/navStyle.css'; // Import the CSS file for styling
+import '../Style/navStyle.css'; // Import the CSS file for styling
 
 // Define the Navbar component and destructure the toggleSidebar prop
-export default function Navbar({ toggleSidebar }) {
+export default function Navbar({toggleDashboard}) { // Receive toggleDashboard prop
     return (
         // Navbar container
         <nav className="nav">
             {/* Button to toggle the sidebar */}
-            <button className="menu-btn" onClick={toggleSidebar}>
-                <IoIosMenu size={34} /> {/* IoIosMenu icon with a size of 34 */}
+            <button className="menu-btn" onClick={toggleDashboard}> {/* Call toggleDashboard function */}
+                <IoIosMenu size={34} />
             </button>
             {/* Link to the home page */}
             <Link to="/" className="site-title">

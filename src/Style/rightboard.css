@@ -1,0 +1,17 @@
+
+.rightboard-container {
+    position: relative;
+    justify-content: center;
+}
+
+.arrow-btn{
+    background-color: white;
+    position: absolute;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.arrow-btn:hover{
+    font-size: 2.5rem;
+}

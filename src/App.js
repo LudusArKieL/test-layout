@@ -1,47 +1,80 @@
 import React, { useState } from 'react';
-import './App.css';
-import axios from 'axios';
-import Navbar from './NavBar';
+//import axios from 'axios';
+import Navbar from './pages/NavBar';
 import Home from './pages/Home';
-import Project from './pages/Project';
-import Profile from './pages/Profile';
-import About from './pages/About';
-import {Route, Routes} from "react-router-dom"
+import Dashboard from './pages/dashboard';
+import Rightboard from './pages/RightBoard';
+//import Project from './pages/Project';
+//import Profile from './pages/Profile';
+//import About from './pages/About';
+import { Route, Routes } from "react-router-dom";
+import './Style/style.css'; // Import CSS file for styling
 
 function App() {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [openDashboard, setDashboard] = useState(true);
+    const [openRightboard, setRightBoard] = useState(true);
 
-    const toggleSidebar = () => {
-        setSidebarOpen(!sidebarOpen);
+    const toggleDashboard = () => {
+        setDashboard(!openDashboard);
+        const dashboard = document.getElementById("dashboard");
+        if (dashboard) {
+            dashboard.style.width = openDashboard ? "100%" : "0%";
+            dashboard.style.visibility = openDashboard;
+        }
+        const mainContent = document.querySelector(".main");
+        if (mainContent) {
+            if(!openRightboard){
+                mainContent.style.gridColumn = openDashboard ? "2 / 2" : "1 / 2 ";
+            }
+            else{
+                mainContent.style.gridColumn = openDashboard ? "2 / 2" : "1 / 2 ";
+            }
+        }
+    };
+
+
+    const toggleRightboard = () => {
+        setRightBoard(!openRightboard);
+        const rightBoardElement = document.getElementById("rightboard");
+        if (rightBoardElement) {
+            rightBoardElement.style.width = openRightboard ? "100%" : "0%";
+            rightBoardElement.style.visibility = openRightboard;
+        }
+        const arrow = document.querySelector(".arrow-btn");
+        if (arrow) {
+            arrow.style.transform = openRightboard ? "rotate(0deg)" : "rotate(180deg)";
+            arrow.style.left = openRightboard ? "0px" : "15px";
+        }
+        const mainContent = document.querySelector(".main");
+        if (mainContent) {
+            if (!openDashboard) {
+                mainContent.style.gridColumn = openRightboard ? "2 / 3 " : "2 / 3 span";
+            }
+            else {
+                mainContent.style.gridColumn = openRightboard ? "1 / 2 " : " 1 / 3 span";
+            }
+        }
     };
     return (
         <>
-        {/* Render the Navbar component and pass toggleSidebar function as prop */}
-            <Navbar toggleSidebar={toggleSidebar} />
+            <Navbar toggleDashboard={toggleDashboard} /> {/* Pass toggleDashboard function */}
             <div className='container'>
+                {/* Conditionally render the dashboard based on dashboardVisible state */}
+                <section className='dashboard' id="dashboard">
+                    <Dashboard />
+                </section>
+                <section className='main' id="main">
+                    {/* Your main content */}
+                </section>
+                <section className='rightboard' id="rightboard">
+                    <Rightboard toggleRightboard={toggleRightboard} />
+                </section>
                 <Routes>
-                    <Route path="/" element={<Home sidebarOpen={sidebarOpen} />} />
-                    <Route path="/project" element={<Project sidebarOpen={sidebarOpen}/>} />
-                    <Route path="/profile" element={<Profile sidebarOpen={sidebarOpen}/>} />
-                    <Route path="/about" element={<About sidebarOpen={sidebarOpen}/>} />
+                    <Route path="/" element={<Home />} />
                 </Routes>
             </div>
         </>
     )
-
-
-  //const apicall = () => {
-  //axios.get('http://localhost:5000').then(() => {
-  //console.log("test!.")
-  //})
-  //}
-  //return (
-  //<div className="App">
-  //<header className="App-header">
-  //<button onClick={apicall}> click me </button>
-  //</header>
-  //</div>
-  //);
 }
 
 export default App;

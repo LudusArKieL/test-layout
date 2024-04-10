@@ -58,7 +58,20 @@ function App() {
             </div>
         </>
     )
-}
 
+
+    //const apicall = () => {
+    //axios.get('http://localhost:5000').then(() => {
+    //console.log("test!.")
+    //})
+    //}
+    //return (
+    //<div className="App">
+    //<header className="App-header">
+    //<button onClick={apicall}> click me </button>
+    //</header>
+    //</div>
+    //);
+}
 
 export default App;

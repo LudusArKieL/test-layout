@@ -4,77 +4,61 @@ import Navbar from './pages/NavBar';
 import Home from './pages/Home';
 import Dashboard from './pages/dashboard';
 import Rightboard from './pages/RightBoard';
-//import Project from './pages/Project';
-//import Profile from './pages/Profile';
-//import About from './pages/About';
+import Project from './pages/Project';
+import Profile from './pages/Profile';
+import About from './pages/About';
 import { Route, Routes } from "react-router-dom";
-import './Style/style.css'; // Import CSS file for styling
+import './Style/style.css';
+
 
 function App() {
     const [openDashboard, setDashboard] = useState(true);
     const [openRightboard, setRightBoard] = useState(true);
+    const [currentDay, setCurrentDay] = useState(new Date()); // State for current dayc
 
     const toggleDashboard = () => {
         setDashboard(!openDashboard);
-        const dashboard = document.getElementById("dashboard");
-        if (dashboard) {
-            dashboard.style.width = openDashboard ? "100%" : "0%";
-            dashboard.style.visibility = openDashboard;
-        }
-        const mainContent = document.querySelector(".main");
-        if (mainContent) {
-            if(!openRightboard){
-                mainContent.style.gridColumn = openDashboard ? "2 / 2" : "1 / 2 ";
-            }
-            else{
-                mainContent.style.gridColumn = openDashboard ? "2 / 2" : "1 / 3 span ";
-            }
-        }
     };
-
 
     const toggleRightboard = () => {
         setRightBoard(!openRightboard);
-        const rightBoardElement = document.getElementById("rightboard");
-        if (rightBoardElement) {
-            rightBoardElement.style.width = openRightboard ? "100%" : "0%";
-            rightBoardElement.style.visibility = openRightboard;
-        }
-        const arrow = document.querySelector(".arrow-btn");
-        if (arrow) {
-            arrow.style.transform = openRightboard ? "rotate(0deg)" : "rotate(180deg)";
-            arrow.style.left = openRightboard ? "0px" : "15px";
-        }
-        const mainContent = document.querySelector(".main");
-        if (mainContent) {
-            if (!openDashboard) {
-                mainContent.style.gridColumn = openRightboard ? "2 / 2 " : "2 / 3 span";
-            }
-            else {
-                mainContent.style.gridColumn = openRightboard ? "1 / 2 " : " 1 / 3 span";
-            }
-        }
     };
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+
+    const changeCurrentDay = (day) => {
+        setCurrentDay(new Date(day.year, day.month, day.number));
+    };
+
     return (
         <>
-            <Navbar toggleDashboard={toggleDashboard} /> {/* Pass toggleDashboard function */}
+            <Navbar
+                toggleDashboard={toggleDashboard}
+                months={months}
+                currentDay={currentDay}
+                changeCurrentDay={changeCurrentDay}
+            />
             <div className='container'>
                 {/* Conditionally render the dashboard based on dashboardVisible state */}
-                <section className='dashboard' id="dashboard">
+                <section className={openDashboard ? "dashboard" : "dashboard active"} id="dashboard">
                     <Dashboard />
                 </section>
-                <section className='main' id="main">
-                    {/* Your main content */}
-                </section>
-                <section className='rightboard' id="rightboard">
+                <main className="main" id="main">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/project" element={<Project />} />
+                        <Route path="/profile" element={<Profile />} />
+                    </Routes>
+                </main>
+                <section className={openRightboard ? "rightboard" : "rightboard active"} id="rightboard">
                     <Rightboard toggleRightboard={toggleRightboard} />
                 </section>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                </Routes>
             </div>
         </>
     )
 }
+
 
 export default App;

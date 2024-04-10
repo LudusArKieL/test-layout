@@ -20,33 +20,58 @@ code {
 }
 
 .container {
-  margin: 0;
+  margin: 0%;
   height: 100vh;
-  display: grid;
-  grid-template-columns: 150px 1fr 35px;
-  grid-template-rows: 1fr;
+  display: flex;
+  flex-direction: row;
 }
 
 .dashboard {
-  background-color: #FF5733;
-  grid-column: 1 / 1;
-  grid-row: 1 / 2;
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
+  background-color: rgba(239, 239, 240, 0.7);
+  border-right: 1px solid #333;
+  width: 10%;
+  transition: all .5s ease;
+}
+
+.dashboard.active{
+  width: .5%;
+}
+.dashboard.active .dashboard-container{
+  visibility: hidden;
 }
 
 .main {
-  background-color: #80CED7;
-  grid-column: 2 / 2;
-  grid-row: 1 / 2;
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
+  background-color: rgba(239, 239, 240, 0.8);
+  flex-grow: 1; /* Occupy remaining space */
+  transition: all .5s ease;
 }
 
+
 .rightboard {
-  background-color: #F4D35E;
-  grid-column: 3 / 3;
-  grid-row: 1 / 2;
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
+  background-color: rgba(239, 239, 240, 0.7);
+  border-left: 1px solid #333;
+  width: 2.5%;
+}
+
+.rightboard.active {
+  width:0%
+}
+
+.rightboard.active .rightboard-container .arrow-btn {
+  position: absolute; /* Position the arrow button absolutely */
+  border-radius: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  transform: rotate(180deg);
+  visibility: visible;
+  right: -1%;
+  transition: all transform 0.5s; /* Add transition for smooth animation */
+}
+.rightboard.active .rightboard-container .arrow-btn:hover{
+  border-radius: 0%;
+  transform: rotate(180deg) scaleX(2rem);
+  right: 0.1%;
+}
+
+.rightboard.active .rightboard-container svg{
+  visibility: hidden;
 }

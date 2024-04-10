@@ -2,6 +2,34 @@
     box-sizing: border-box;
 }
 
+.month{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+}
+
+.month svg{
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.month svg:hover{
+    color: red;
+}
+
+.dropdown {
+    margin-left: 1rem;
+}
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+
 /* Menu button */
 .menu-btn {
     background-color: #333;
@@ -11,28 +39,30 @@
     padding: 10px;
     border-radius: 50%;
     transition: background-color 0.3s;
-    z-index: 1; /* Ensure button is above sidebar */
 }
 
 .menu-btn:hover {
     background-color: #1111116f;
+    color: red;
 }
 
 /* Navbar */
 .nav {
+    border-bottom: 2px solid #111;
     background-color: #333;
     color: white;
     display: flex;
     justify-content: space-between;
-    align-items: stretch;
     gap: 2rem;
     padding: 0 1rem;
-    position: relative; /* Set position to relative */
-    z-index: 2;
+    position: relative;
 }
 
 .site-title {
-    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
 }
 
 .nav ul {
@@ -53,9 +83,45 @@
 }
 
 .nav li.active {
-    background-color: rgba(255, 48, 48, 0.533);
+    background-color: rgba(232, 236, 241, .2);
+    color: red;
 }
 
 .nav li:hover {
-    background-color: #555;
+    background-color: #1111116f;
+    color: red;
+}
+
+.profile-icon{
+    margin-right: .5rem;
+}
+
+.radio-container {
+    display: flex;
+}
+.radio-container a{
+    padding: 0;
+}
+.radio-container label {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 75px;
+    height: 75px;
+    border: 1px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.radio-container label:hover {
+    background-color: #1111116f;
+    font-size: 3rem;
+    color: red;
+}
+
+h1 span{
+    color: rgba(255, 0, 0, 0.9);
 }

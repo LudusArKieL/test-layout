@@ -1,59 +1,61 @@
+/* Calendar */
 .calendar {
     height: 100%;
-    display: relative;
-    flex-direction: column;
-}
-
-.calendar-header {
-    height: 100px;
-    width: 100%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .calendar-body {
-    width: 100%;
-    flex-grow: 1;
     display: flex;
-    flex-direction: column;
-}
-
-.table-header {
-    height: 100px;
-    width: 100%;
-    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
+    height: 100%; /* Occupy all available vertical space */
 }
 
-.weekday {
-    width: 100px;
-    text-align: center;
+.calendar-table {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
 }
 
 .table-content {
     width: 100%;
-    flex-grow: 1;
+    display: flex;
+    height: calc(100%/ 7);
+    border-bottom: 1px solid black;
+}
+
+.table-header {
+    display: flex;
+    background-color: rgba(189, 195, 199, .8);
+}
+
+.weekday {
+    width: calc(100% / 7); /* Adjust based on the number of days in a row */
+    position: relative;
+    border-right: 1px solid black;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    box-sizing: border-box;
+    flex-direction: column;
 }
 
 .calendar-day {
-    width: 125px;
-    height: 75px;
+    width: calc(100% / 7); /* Adjust based on the number of days in a row */
     position: relative;
-    border: 1px solid #a6a6a6;
+    border-right: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    cursor: pointer;
 }
 
 .calendar-day:hover {
-    background-color: rgba(0, 0, 0, .10);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .calendar-day p {
-    position: absolute;
-    right: 10px;
     color: #a6a6a6;
 }
 

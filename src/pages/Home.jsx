@@ -1,12 +1,8 @@
-import { useState } from "react";
-import { IoIosAddCircleOutline } from "react-icons/io";
+import '../Style/calendar.css'
+import Calendar from '../script/calendarTable';
 
 export default function home() {
     return (
-        <main className="main">
-            <div>
-                <h1>home</h1>
-            </div>
-        </main>
+        <Calendar />
     )
 }
